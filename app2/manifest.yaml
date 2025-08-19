@@ -26,8 +26,6 @@ spec:
       containers:
       - name: app2 
         image: govardhanxo/app2:v1
-      # ports:
-      # - containerPort: 80
 ---
 apiVersion: v1
 kind: Service

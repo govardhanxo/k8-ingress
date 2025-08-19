@@ -53,7 +53,7 @@ metadata:
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS": 443}]'
     alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:688372068521:certificate/2927062c-a85e-4ff7-9cad-f79660d2a7e2
     alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/target-type: ip 
+    alb.ingress.kubernetes.io/target-type: ip
 spec:
   ingressClassName: alb
   rules:
@@ -64,7 +64,7 @@ spec:
         path: "/"
         backend:
           service:
-            name: app1-service
+            name: app1
             port:
               number: 80 # app1 service port
 

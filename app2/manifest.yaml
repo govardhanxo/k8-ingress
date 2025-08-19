@@ -1,12 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: app1 
+  name: app2 
   # deployment labels
   labels:
     purpose: ingress
     project: roboshop
-    app: app1
+    app: app2
 spec:
   replicas: 2
   # These are the labels replica set use to create pod replicas, this should match pod labels
@@ -14,34 +14,34 @@ spec:
     matchLabels:
       purpose: ingress
       project: roboshop
-      app: app1
+      app: app2
   # This is pod definition
   template:
     metadata:
       labels:
         purpose: ingress
         project: roboshop
-        app: app1
+        app: app2
     spec:
       containers:
-      - name: app1 
-        image: govardhanxo/app1:v1
+      - name: app2 
+        image: govardhanxo/app2:v1
       # ports:
       # - containerPort: 80
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: app1 
+  name: app2 
   labels:
     purpose: ingress
     project: roboshop
-    app: app1
+    app: app2
 spec:
   selector:
     purpose: ingress
     project: roboshop
-    app: app1
+    app: app2
   ports:
     - protocol: TCP
       port: 80 # service port
@@ -50,7 +50,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: app1 
+  name: app2 
   annotations:
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS": 443}]'
     alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:688372068521:certificate/2927062c-a85e-4ff7-9cad-f79660d2a7e2
@@ -60,14 +60,14 @@ metadata:
 spec:
   ingressClassName: alb
   rules:
-  - host: "app1.govardhanxo.site"
+  - host: "app2.govardhanxo.site"
     http:
       paths:
       - pathType: Prefix
         path: "/"
         backend:
           service:
-            name: app1
+            name: app2
             port:
-              number: 80 # app1 service port
+              number: 80 # app2 service port
 
